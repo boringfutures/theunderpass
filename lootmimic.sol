@@ -1405,7 +1405,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
     function getlastname(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "lastname", chestArmor);
+        return pluck(tokenId, "lastname", lastname);
     }
     
     function getsuffixes(uint256 tokenId) public view returns (string memory) {
