@@ -1284,8 +1284,8 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 }
 
 
-contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
-
+contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable { 
+    
         string[] private titles = [
         "Ser",
         "Dr",
@@ -1305,7 +1305,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Earl",
         "Baron",
         "Count",
-        "Bogtroll",
+        "Bogtroll"
     ];
 
         string[] private firstname = [
@@ -1341,7 +1341,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Mercucio",
         "Cicero",
         "Luke",
-        "Richard",
+        "Richard"
     ];
     
     string[] private lastname = [
@@ -1371,7 +1371,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Zhang",
         "Kumar",
         "Ivanogh",
-        "Petrov",
+        "Petrov"
     ];
     
     string[] private suffixes = [
@@ -1389,7 +1389,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "The Innocent",
         "The Wild",
         "Of Summer",
-        "Of Winter",
+        "Of Winter"
     ];
 
      function random(string memory input) internal pure returns (uint256) {
