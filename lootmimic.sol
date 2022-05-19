@@ -1417,9 +1417,9 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
         uint256 greatness = rand % 21;
-        if (greatness > 14) {
+        if (greatness > 5) {
         }
-        if (greatness >= 19) {
+        if (greatness >= 15) {
             string[2] memory name;
             name[0] = namePrefixes[rand % namePrefixes.length];
             name[1] = nameSuffixes[rand % nameSuffixes.length];
@@ -1434,7 +1434,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
         string[17] memory parts;
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
+        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: sansserif; font-size: 16px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
         parts[1] = getfirstname(tokenId);
 
@@ -1448,7 +1448,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAMES #', toString(tokenId), '", "description": "NAMES is a generative family tree, created on-chain", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAMES #', toString(tokenId), '", "description": "Welcome to the house of NAMES, created on-chain", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
