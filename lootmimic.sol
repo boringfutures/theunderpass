@@ -1396,10 +1396,10 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         return uint256(keccak256(abi.encodePacked(input)));
     }
     
-     function gettitles(uint256 tokenId) public view returns (string memory) {
+     function getnameprefixes(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "nameprefixes", namePrefixes);
     }
-    
+
     function getfirstname(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "firstname", firstname);
     }
