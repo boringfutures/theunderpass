@@ -1286,7 +1286,7 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 
 contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable { 
     
-        string[] private titles = [
+        string[] private namePrefixes = [
         "Ser",
         "Dr",
         "Sir", 
@@ -1374,7 +1374,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Petrov"
     ];
     
-    string[] private suffixes = [
+    string[] private nameSuffixes = [
         "Jnr",
         "Esq",
         "I",
@@ -1397,7 +1397,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
      function gettitles(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "titles", titles);
+        return pluck(tokenId, "nameprefixes", namePrefixes);
     }
     
     function getfirstname(uint256 tokenId) public view returns (string memory) {
@@ -1409,21 +1409,20 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
     }
     
     function getsuffixes(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "suffixes", suffixes);
+        return pluck(tokenId, "namesuffixes", nameSuffixes);
     }
 
     
-    function pluck(uint256 tokenId, string memory keytitles, string[] memory sourceArray) internal view returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
         uint256 greatness = rand % 21;
         if (greatness > 14) {
-            output = string(abi.encodePacked(output, " ", suffixes[rand % suffixes.length]));
         }
         if (greatness >= 19) {
             string[2] memory name;
-            name[0] = nametitles[rand % nameSuffixes.length];
-            name[1] = nametitles[rand % nameSuffixes.length];
+            name[0] = namePrefixes[rand % namePrefixes.length];
+            name[1] = nameSuffixes[rand % nameSuffixes.length];
             if (greatness == 19) {
                 output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output));
             } else {
@@ -1437,28 +1436,19 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         string[17] memory parts;
         parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
-        parts[1] = gettitles(tokenId);
+        parts[1] = getfirstname(tokenId);
 
-        parts[2] = '</text><text x="10" y="40" class="base">';
+        parts[2] = '</text><text x="10" y="60" class="base">';
 
-        parts[3] = getfirstname(tokenId);
+        parts[3] = getlastname(tokenId);
 
-        parts[4] = '</text><text x="10" y="60" class="base">';
+        parts[4] = '</text><text x="10" y="80" class="base">';
 
-        parts[5] = getlastname(tokenId);
+        parts[5] = '</text></svg>';
 
-        parts[6] = '</text><text x="10" y="80" class="base">';
-
-        parts[7] = getsuffixes(tokenId);
-
-        parts[8] = '</text><text x="10" y="100" class="base">';
-
-        parts[9] = '</text></svg>';
-
-        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]));
-        output = string(abi.encodePacked(output, parts[7], parts[8], parts[9]));
+        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAME #', toString(tokenId), '" "description": "NAMES is randomized family tree, generated and stored on chain. , "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAMES #', toString(tokenId), '", "description": "NAMES is a generative family tree, created on-chain", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
