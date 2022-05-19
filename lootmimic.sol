@@ -1306,7 +1306,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Baron",
         "Count",
         "Bogtroll",
-
     ];
 
         string[] private firstname = [
@@ -1343,7 +1342,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Cicero",
         "Luke",
         "Richard",
-
     ];
     
     string[] private lastname = [
@@ -1374,7 +1372,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Kumar",
         "Ivanogh",
         "Petrov",
-    
     ];
     
     string[] private suffixes = [
@@ -1393,7 +1390,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "The Wild",
         "Of Summer",
         "Of Winter",
-        
     ];
 
      function random(string memory input) internal pure returns (uint256) {
@@ -1459,10 +1455,10 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
 
         parts[9] = '</text></svg>';
 
-        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9],));
+        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]));
+        output = string(abi.encodePacked(output, parts[7], parts[8], parts[9]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAME #', toString(tokenId), '", "description": "NAMES is randomized family tree, generated and stored on chain. , "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "NAME #', toString(tokenId), '" "description": "NAMES is randomized family tree, generated and stored on chain. , "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
