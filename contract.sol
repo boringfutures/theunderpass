@@ -1400,11 +1400,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         return uint256(keccak256(abi.encodePacked(input)));
     }
     
-     function getnameprefixes
-(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "nameprefixes", namePrefixes);
-    }
-
     function getfirstname(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "firstname", firstname);
     }
@@ -1413,10 +1408,6 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "lastname", lastname);
     }
     
-    function getsuffixes(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "namesuffixes", nameSuffixes);
-    }
-
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
