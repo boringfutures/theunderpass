@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at Etherscan.io on 2021-08-27
+*/
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -22,7 +26,6 @@ interface IERC165 {
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
-
 
 
 
@@ -1287,7 +1290,8 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
 contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable { 
     
         string[] private namePrefixes = [
-        "Ser",
+        "",
+        "ser",
         "Dr",
         "Sir", 
         "Lord",
@@ -1396,7 +1400,8 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         return uint256(keccak256(abi.encodePacked(input)));
     }
     
-     function getnameprefixes(uint256 tokenId) public view returns (string memory) {
+     function getnameprefixes
+(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "nameprefixes", namePrefixes);
     }
 
@@ -1417,8 +1422,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
         uint256 greatness = rand % 21;
-        if (greatness > 5) {
-        }
+       
         if (greatness >= 15) {
             string[2] memory name;
             name[0] = namePrefixes[rand % namePrefixes.length];
