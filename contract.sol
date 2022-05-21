@@ -1312,7 +1312,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Bogtroll"
     ];
 
-        string[] private firstname = [
+        string[] private FirstNames = [
         "Faron",
         "Timothy",
         "Ash",
@@ -1348,7 +1348,7 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         "Richard"
     ];
     
-    string[] private lastname = [
+    string[] private LastNames = [
         "The Great",
         "Smith",
         "Ballbag",
@@ -1400,28 +1400,28 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         return uint256(keccak256(abi.encodePacked(input)));
     }
     
-    function getfirstname(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "firstname", firstname);
+    function getFirstNames(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "FirstNames", FirstNames);
     }
     
-    function getlastname(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "lastname", lastname);
+    function getLastNames(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "Lastnames", LastNames);
     }
     
     
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
-        uint256 greatness = rand % 21;
+        uint256 nobility = rand % 30;
        
-        if (greatness >= 15) {
+        if (nobility >= 10) {
             string[2] memory name;
             name[0] = namePrefixes[rand % namePrefixes.length];
             name[1] = nameSuffixes[rand % nameSuffixes.length];
-            if (greatness == 19) {
-                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output));
+            if (nobility == 10) {
+                output = string(abi.encodePacked('"', name[0], ' ', name[0], '" ', output));
             } else {
-                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output, " +1"));
+                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output));
             }
         }
         return output;
@@ -1431,11 +1431,11 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
         string[17] memory parts;
         parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: sansserif; font-size: 16px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
-        parts[1] = getfirstname(tokenId);
+        parts[1] = getFirstNames(tokenId);
 
         parts[2] = '</text><text x="10" y="60" class="base">';
 
-        parts[3] = getlastname(tokenId);
+        parts[3] = getLastNames(tokenId);
 
         parts[4] = '</text><text x="10" y="80" class="base">';
 
