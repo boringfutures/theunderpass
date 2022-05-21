@@ -1412,16 +1412,16 @@ contract NAMES is ERC721Enumerable, ReentrancyGuard, Ownable {
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
-        uint256 nobility = rand % 30;
+        uint256 nobility = rand % 20;
        
-        if (nobility >= 10) {
+        if (nobility >= 20) {
             string[2] memory name;
             name[0] = namePrefixes[rand % namePrefixes.length];
             name[1] = nameSuffixes[rand % nameSuffixes.length];
-            if (nobility == 10) {
+            if (nobility == 15) {
                 output = string(abi.encodePacked('"', name[0], ' ', name[0], '" ', output));
             } else {
-                output = string(abi.encodePacked('"', name[0], ' ', name[1], '" ', output));
+                output = string(abi.encodePacked('"', name[0], ' ', name[0], '" ', output));
             }
         }
         return output;
